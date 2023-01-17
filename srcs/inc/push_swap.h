@@ -6,7 +6,7 @@
 /*   By: hbenfadd <hbenfadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 08:39:05 by hbenfadd          #+#    #+#             */
-/*   Updated: 2023/01/17 09:16:32 by hbenfadd         ###   ########.fr       */
+/*   Updated: 2023/01/17 11:07:11 by hbenfadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		check_nbr(int *arry, size_t size);
 ssize_t	*ft_lis(t_list *lst, size_t size);
 void	push_tob(ssize_t *lis, t_list **stack_a, t_list **stack_b);
 int		*get_bestmove(int *arry, t_list *stack_b, size_t size_a, size_t size_b);
-void	make_themove(t_list **stack_a, t_list **stack_b, int *move);
+void	make_themove(t_list **stack_a, t_list **stack_b, int *mv);
 size_t	get_abs(int nbr);
 void	positve_move(int a, int b, int *mv);
 void	negative_move(int a, int b, int *mv);
