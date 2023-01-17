@@ -6,7 +6,7 @@
 /*   By: hbenfadd <hbenfadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 13:33:57 by hbenfadd          #+#    #+#             */
-/*   Updated: 2023/01/17 10:51:00 by hbenfadd         ###   ########.fr       */
+/*   Updated: 2023/01/17 22:47:52 by hbenfadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	free_all(char **split)
 
 static void	p_error(void)
 {
-	write(2, "error\n", 6);
+	write(2, "Error\n", 6);
 }
 
 int	main(int ac, char **av)
@@ -46,7 +46,7 @@ int	main(int ac, char **av)
 	{
 		tmp = ft_split(av[i++], ' ');
 		if (!tmp || !(*tmp))
-			return (ft_lstclear(&stack_a, del), write(2, "error\n", 6), 1);
+			return (ft_lstclear(&stack_a, del), p_error(), 1);
 		if (check_error(tmp))
 			return (ft_lstclear(&stack_a, del), free_all(tmp), p_error(), 1);
 		if (addnbr_to_stack(&stack_a, tmp))
