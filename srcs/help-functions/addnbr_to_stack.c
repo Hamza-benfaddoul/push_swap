@@ -25,28 +25,24 @@ static int	check_double_nbr(t_list *stack, int nbr)
 
 int	addnbr_to_stack(t_list **stack, char **ar)
 {
-	t_list	*lst;
+	t_list	*node;
 	int		*tmp;
-	int		i;
 
-	i = 0;
-	while (ar[i])
+	node = NULL;
+	tmp = NULL;
+	while (*ar)
 	{
 		tmp = (int *)malloc(sizeof(int));
 		if (!tmp)
 			return (1);
-		*tmp = ft_atoi(ar[i++]);
+		*tmp = ft_atoi(*ar);
 		if (check_double_nbr(*stack, *tmp))
 			return (1);
-		if (!stack)
-			*stack = ft_lstnew(tmp);
-		else
-		{
-			lst = ft_lstnew(tmp);
-			if (!lst)
-				return (1);
-			ft_lstadd_back(stack, lst);
-		}
+		node = ft_lstnew(tmp);
+		if (!node)
+			return (1);
+		ft_lstadd_back(stack, node);
+		ar++;
 	}
 	return (0);
 }
