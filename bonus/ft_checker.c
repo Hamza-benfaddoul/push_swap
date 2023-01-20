@@ -27,6 +27,8 @@ static int	do_move(t_list **stack_a, t_list **stack_b, char *move)
 		swap_topstack(stack_b);
 	else if (!ft_strncmp("ss\n", move, 3))
 		swap_topstacks(stack_a, stack_b);
+	else if (!ft_strncmp("pa\n", move, 3))
+		push_tostack(stack_b, stack_a);
 	else if (!ft_strncmp("pb\n", move, 3))
 		push_tostack(stack_a, stack_b);
 	else if (!ft_strncmp("ra\n", move, 3))
