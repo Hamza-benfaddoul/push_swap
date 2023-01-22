@@ -12,13 +12,13 @@
 
 #include "push_swap.h"
 
-void	del(void *prt)
+static void	del(void *prt)
 {
 	free(prt);
 	prt = NULL;
 }
 
-void	free_all(char **split)
+static void	free_all(char **split)
 {
 	size_t	i;
 

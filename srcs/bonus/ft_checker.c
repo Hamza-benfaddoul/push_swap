@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "../get_nextline/get_next_line.h"
+#include "../../get_nextline/get_next_line.h"
 
 static void	del(void *ptr)
 {
@@ -52,20 +52,19 @@ void	ft_checker(t_list **stack_a)
 {
 	t_list	*stack_b;
 	char	*move;
-	size_t	s;
 
-	s = ft_lstsize(*stack_a);
 	stack_b = NULL;
 	move = get_next_line(0);
 	while (move)
 	{
-		if (s == 1 || ft_strlen(move) > 4 || do_move(stack_a, &stack_b, move))
+		if (!((*stack_a)->next) || ft_strlen(move) > 4 || do_move(stack_a, &stack_b, move))
 		{
 			ft_lstclear(stack_a, del);
 			ft_lstclear(&stack_b, del);
 			write (2, "Error\n", 6);
 			exit(1);
 		}
+		free(move);
 		move = get_next_line(0);
 	}
 	if (stack_b || isstack_sorted(*stack_a))

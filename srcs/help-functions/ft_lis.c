@@ -12,20 +12,20 @@
 
 #include "push_swap.h"
 
-/*get the the index that has max lenght*/
-size_t	get_index(int *lenght, size_t size)
+/*get the the index that has max length*/
+static int	get_index(int *length, size_t size)
 {
 	size_t	i;
-	size_t	temp;
+	int		temp;
 	int		tmp;
 
 	i = 0;
 	tmp = INT_MIN;
 	while (i < size)
 	{
-		if (lenght[i] > tmp)
+		if (length[i] > tmp)
 		{
-			tmp = lenght[i];
+			tmp = length[i];
 			temp = i;
 		}
 		i++;
@@ -34,18 +34,18 @@ size_t	get_index(int *lenght, size_t size)
 }
 
 /*return lis */
-ssize_t	*get_lis(int *arry, int *lenght, int *sub_sq, size_t size)
+static int	*get_lis(int *arry, int *length, int *sub_sq, size_t size)
 {
-	size_t	i;
-	size_t	j;
-	size_t	k;
-	ssize_t	*tmp;
+	int	i;
+	int	j;
+	int	k;
+	int	*tmp;
 
 	tmp = NULL;
 	i = 1;
-	j = get_index(lenght, size);
-	k = lenght[j];
-	tmp = (ssize_t *)malloc(sizeof(ssize_t) * k + 1);
+	j = get_index(length, size);
+	k = length[j];
+	tmp = (int *)malloc(sizeof(int) * k + 1);
 	if (!tmp)
 		return (NULL);
 	tmp[0] = k;
@@ -59,8 +59,8 @@ ssize_t	*get_lis(int *arry, int *lenght, int *sub_sq, size_t size)
 	return (tmp);
 }
 
-/*calucalte lenght of lis for each number*/
-void	get_lenghtlis(int *arry, int *lenght, int *sub_sq, size_t size)
+/*calucalte length of lis */
+static void	get_length_oflis(int *arry, int *length, int *sub_sq, size_t size)
 {
 	size_t	i;
 	size_t	j;
@@ -71,13 +71,10 @@ void	get_lenghtlis(int *arry, int *lenght, int *sub_sq, size_t size)
 		j = 0;
 		while (j < i)
 		{
-			if (arry[j] < arry[i])
+			if ((arry[j] < arry[i]) && (length[i] < length[j] + 1))
 			{
-				if (lenght[i] <= lenght[j] + 1)
-				{
-					lenght[i] = lenght[j] + 1;
-					sub_sq[i] = j;
-				}
+				length[i] = length[j] + 1;
+				sub_sq[i] = j;
 			}
 			j++;
 		}
@@ -86,24 +83,28 @@ void	get_lenghtlis(int *arry, int *lenght, int *sub_sq, size_t size)
 }
 
 /*allocate memory and call funtion to get lis*/
-ssize_t	*ft_lis(t_list *lst, size_t size)
+int	*ft_lis(t_list *lst, size_t size)
 {
 	size_t	i;
+	int		*lis;
 	int		*arry;
-	int		*lenght;
+	int		*length;
 	int		*sub_sq;
-	ssize_t	*lis;
 
 	i = 0;
 	lis = NULL;
 	arry = add_toarry(lst, size);
-	lenght = (int *)malloc(sizeof(int) * size);
-	sub_sq = (int *)malloc(sizeof(int) * size);
-	if (!arry || !lenght || !sub_sq)
+	if (!arry)
 		return (NULL);
+	length = (int *)malloc(sizeof(int) * size);
+	if (!length)
+		return (free(arry),NULL);
+	sub_sq = (int *)malloc(sizeof(int) * size);
+	if (!sub_sq)
+		return (free(arry), free(length),NULL);
 	while (i < size)
-		lenght[i++] = 1;
-	get_lenghtlis(arry, lenght, sub_sq, size);
-	lis = get_lis(arry, lenght, sub_sq, size);
-	return (free(lenght), free(arry), free(sub_sq), lis);
+		length[i++] = 1;
+	get_length_oflis(arry, length, sub_sq, size);
+	lis = get_lis(arry, length, sub_sq, size);
+	return (free(length), free(arry), free(sub_sq), lis);
 }

@@ -58,27 +58,55 @@ static void	final_sort(t_list **stack_a, size_t size)
 	}
 }
 
+static	int *longest_is(t_list **stack, size_t size, int i)
+{
+	int	k;
+	int *tmp;
+
+	k = i * -1;
+	tmp = NULL;
+	if (!i)
+		return (ft_lis(*stack, size));
+	while (i || k)
+	{
+		if (i < 0)
+		{
+			while (i++)
+				reverse_rstack(stack);
+		}
+		else if (i > 0)
+		{
+			while (i--)
+				rotate_stack(stack);
+		}
+		if (k)
+			tmp = ft_lis(*stack, size);
+		i = k;
+		k = 0;
+	}
+	return (tmp);
+}
+
 void	push_swap(t_list **stack_a, size_t size)
 {
 	t_list	*stack_b;
-	int		*a;
-	ssize_t	*tmp;
+	int		*tmp;
 	int		*m;
 
 	stack_b = NULL;
-	a = NULL;
-	tmp = ft_lis(*stack_a, size);
+	tmp = longest_is(stack_a, size, get_indexminnbr(*stack_a, size));
 	if (!tmp)
 		return ;
-	push_tob(tmp, stack_a, &stack_b);
+	if (*tmp != (int)size)
+		push_tob(tmp, stack_a, &stack_b);
 	free(tmp);
 	while (ft_lstsize(stack_b))
 	{
-		a = add_toarry(*stack_a, ft_lstsize(*stack_a));
-		if (!a)
+		tmp = add_toarry(*stack_a, ft_lstsize(*stack_a));
+		if (!tmp)
 			return ;
-		m = get_bestmove(a, stack_b, ft_lstsize(*stack_a), ft_lstsize(stack_b));
-		free(a);
+		m = get_bestmove(tmp, stack_b, ft_lstsize(*stack_a), ft_lstsize(stack_b));
+		free(tmp);
 		if (!m)
 			return ;
 		make_themove(stack_a, &stack_b, m);

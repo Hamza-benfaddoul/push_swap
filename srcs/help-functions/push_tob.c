@@ -12,18 +12,19 @@
 
 #include "push_swap.h"
 
-static int	checker(int *a, ssize_t *lis)
+static int	binarySearch(int *arr, int low, int high, int x)
 {
-	int	i;
+	int	mid;
 
-	i = 1;
-	while (i <= lis[0])
-	{
-		if (*a == lis[i])
-			return (1);
-		i++;
-	}
-	return (0);
+    mid = low + (high - low) / 2;
+    if (high >= low) {
+        if (arr[mid] == x)
+            return (1);
+        if (arr[mid] < x)
+            return binarySearch(arr, low, mid - 1, x);
+        return binarySearch(arr, mid + 1, high, x);
+    }
+    return (0);
 }
 
 static void	make_rotate(t_list **stack_a, size_t i, size_t size)
@@ -37,7 +38,7 @@ static void	make_rotate(t_list **stack_a, size_t i, size_t size)
 			i--;
 		}
 	}
-	else if (i > size / 2)
+	else
 	{
 		i = size - i;
 		while (i)
@@ -49,7 +50,7 @@ static void	make_rotate(t_list **stack_a, size_t i, size_t size)
 	}
 }
 
-void	push_tob(ssize_t *lis, t_list **stack_a, t_list **stack_b)
+void	push_tob(int *lis, t_list **stack_a, t_list **stack_b)
 {
 	int		i;
 	t_list	*tmp;
@@ -58,7 +59,7 @@ void	push_tob(ssize_t *lis, t_list **stack_a, t_list **stack_b)
 	tmp = *stack_a;
 	while (tmp)
 	{
-		if (!checker(tmp->content, lis))
+		if (!binarySearch(lis, 1, *lis, *(int *)tmp->content))
 		{
 			make_rotate(stack_a, i, ft_lstsize(*stack_a));
 			push_tostack(stack_a, stack_b);
