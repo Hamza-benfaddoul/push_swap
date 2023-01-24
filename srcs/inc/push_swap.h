@@ -44,5 +44,6 @@ int		addnbr_to_stack(t_list **stack, char **ar);
 int		check_error(char **str);
 void	ft_checker(t_list **stack_a);
 int		isstack_sorted(t_list *stack);
+void	tree_sort(t_list **stack);
 
 #endif

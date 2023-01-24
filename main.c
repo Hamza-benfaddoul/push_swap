@@ -53,6 +53,9 @@ int	main(int ac, char **av)
 			return (ft_lstclear(&stack_a, del), free_all(tmp), p_error(), 1);
 		free_all(tmp);
 	}
-	push_swap(&stack_a, ft_lstsize(stack_a));
+	if (ac == 4)
+		tree_sort(&stack_a);
+	else
+		push_swap(&stack_a, ft_lstsize(stack_a));
 	return (ft_lstclear(&stack_a, del), 0);
 }
