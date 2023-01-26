@@ -6,7 +6,7 @@
 /*   By: hbenfadd <hbenfadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 17:17:23 by hbenfadd          #+#    #+#             */
-/*   Updated: 2023/01/14 18:56:22 by hbenfadd         ###   ########.fr       */
+/*   Updated: 2023/01/26 01:32:05 by hbenfadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,10 @@ int	*ft_lis(t_list *lst, size_t size)
 		return (NULL);
 	length = (int *)malloc(sizeof(int) * size);
 	if (!length)
-		return (free(arry),NULL);
+		return (free(arry), NULL);
 	sub_sq = (int *)malloc(sizeof(int) * size);
 	if (!sub_sq)
-		return (free(arry), free(length),NULL);
+		return (free(arry), free(length), NULL);
 	while (i < size)
 		length[i++] = 1;
 	get_length_oflis(arry, length, sub_sq, size);

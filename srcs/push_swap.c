@@ -6,7 +6,7 @@
 /*   By: hbenfadd <hbenfadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 13:18:01 by hbenfadd          #+#    #+#             */
-/*   Updated: 2023/01/17 09:43:04 by hbenfadd         ###   ########.fr       */
+/*   Updated: 2023/01/26 02:02:38 by hbenfadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ static void	final_sort(t_list **stack_a, size_t size)
 	}
 }
 
-static	int *longest_is(t_list **stack, size_t size, int i)
+static int	*longest_is(t_list **stack, size_t size, int i)
 {
 	int	k;
-	int *tmp;
+	int	*tmp;
 
 	k = i * -1;
 	tmp = NULL;
@@ -90,23 +90,23 @@ static	int *longest_is(t_list **stack, size_t size, int i)
 void	push_swap(t_list **stack_a, size_t size)
 {
 	t_list	*stack_b;
-	int		*tmp;
+	int		*t;
 	int		*m;
 
 	stack_b = NULL;
-	tmp = longest_is(stack_a, size, get_indexminnbr(*stack_a, size));
-	if (!tmp)
+	t = longest_is(stack_a, size, get_indexminnbr(*stack_a, size));
+	if (!t)
 		return ;
-	if (*tmp != (int)size)
-		push_tob(tmp, stack_a, &stack_b);
-	free(tmp);
-	while (ft_lstsize(stack_b))
+	if (*t != (int)size)
+		push_tob(t, stack_a, &stack_b);
+	free(t);
+	while (stack_b)
 	{
-		tmp = add_toarry(*stack_a, ft_lstsize(*stack_a));
-		if (!tmp)
+		t = add_toarry(*stack_a, ft_lstsize(*stack_a));
+		if (!t)
 			return ;
-		m = get_bestmove(tmp, stack_b, ft_lstsize(*stack_a), ft_lstsize(stack_b));
-		free(tmp);
+		m = get_bestmove(t, stack_b, ft_lstsize(*stack_a), ft_lstsize(stack_b));
+		free(t);
 		if (!m)
 			return ;
 		make_themove(stack_a, &stack_b, m);

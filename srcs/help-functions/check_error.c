@@ -6,7 +6,7 @@
 /*   By: hbenfadd <hbenfadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 08:40:17 by hbenfadd          #+#    #+#             */
-/*   Updated: 2023/01/17 08:40:18 by hbenfadd         ###   ########.fr       */
+/*   Updated: 2023/01/26 01:47:03 by hbenfadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	check_max_min_int(char *str)
 {
 	size_t	result;
 	int		sign;
-	
+
 	result = 0;
 	sign = 0;
 	if (*str == '-' || *str == '+')

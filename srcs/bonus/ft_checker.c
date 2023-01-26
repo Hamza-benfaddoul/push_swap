@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbenfadd <hbenfadd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 01:54:55 by hbenfadd          #+#    #+#             */
-/*   Updated: 2023/01/18 02:00:56 by hbenfadd         ###   ########.fr       */
+/*   Created: 2023/01/26 02:04:19 by hbenfadd          #+#    #+#             */
+/*   Updated: 2023/01/26 02:04:20 by hbenfadd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,22 @@ static int	do_move(t_list **stack_a, t_list **stack_b, char *move)
 void	ft_checker(t_list **stack_a)
 {
 	t_list	*stack_b;
-	char	*move;
+	char	*y;
 
 	stack_b = NULL;
-	move = get_next_line(0);
-	while (move)
+	y = get_next_line(0);
+	while (y)
 	{
-		if (!((*stack_a)->next) || ft_strlen(move) > 4 || do_move(stack_a, &stack_b, move))
+		if (!((*stack_a)->next) || ft_strlen(y) > 4
+			|| do_move(stack_a, &stack_b, y))
 		{
 			ft_lstclear(stack_a, del);
 			ft_lstclear(&stack_b, del);
 			write (2, "Error\n", 6);
 			exit(1);
 		}
-		free(move);
-		move = get_next_line(0);
+		free(y);
+		y = get_next_line(0);
 	}
 	if (stack_b || isstack_sorted(*stack_a))
 	{
