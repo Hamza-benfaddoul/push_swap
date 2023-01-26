@@ -16,7 +16,6 @@ CFLAGS = -g -Wall -Wextra -Werror -I$(DIRINC)
 CLIB = -L$(FTDIR) -lft
 DIRINC = ./srcs/inc 
 FTDIR = ./libft
-LIBFT = ./libft/libft.a
 
 RULE_FUN = push_tostack.c \
 		reverse_rstacks.c \
@@ -34,6 +33,7 @@ Help_fun = add_toArry.c \
 		positive_move.c \
 		negative_move.c \
 		get_abs.c \
+		tree_sorte.c \
 		mix_move.c \
 		get_bigone.c \
 		check_error.c \
@@ -60,14 +60,14 @@ BONUSSRCS = $(addprefix ./srcs/bonus/, $(BONUS_FUN)) \
 OBJS = $(SRCS:.c=.o)
 BONUSOBJS = $(BONUSSRCS:.c=.o)
 
-all : $(NAME)
-bonus : $(BONUSOBJS) $(LIBFT)
+all : $(NAME) 
+bonus : makelibft $(BONUSOBJS) 
 	$(CC) $(CFLAGS) $(BONUSOBJS) $(CLIB) -o checker
 
-$(NAME) : $(LIBFT) $(OBJS)
+$(NAME) : makelibft $(OBJS)
 	$(CC)  $(CFLAGS) $(OBJS) $(CLIB) -o $(NAME) 
-
-$(LIBFT) :
+	
+makelibft : 
 	make all bonus -C ./libft
 clean :
 	rm -f $(OBJS) $(BONUSOBJS)
