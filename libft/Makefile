@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hbenfadd <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: hbenfadd <hbenfadd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/12 11:25:18 by hbenfadd          #+#    #+#              #
-#    Updated: 2022/11/06 20:42:24 by hbenfadd         ###   ########.fr        #
+#    Updated: 2023/01/28 09:44:08 by hbenfadd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,8 +64,8 @@ OBJS = $(SRCS:.c=.o)
 
 BONUSOBJS = $(BONUSSRC:.c=.o)
 
-bonus : $(BONUSOBJS)
-	ar rc  $(NAME) $^
+bonus : $(NAME) $(BONUSOBJS)
+	ar rc  $^
 $(NAME) : $(OBJS) 
 	ar rc $(NAME) $^
 
