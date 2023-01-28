@@ -6,16 +6,19 @@
 #    By: hbenfadd <hbenfadd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/24 10:32:44 by hbenfadd          #+#    #+#              #
-#    Updated: 2023/01/17 23:14:04 by hbenfadd         ###   ########.fr        #
+#    Updated: 2023/01/28 10:20:36 by hbenfadd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-CC = gcc 
-CFLAGS = -g -Wall -Wextra -Werror -I$(DIRINC)
+BONUS_NAME = checker
+
+CC = CC 
+CFLAGS = -Wall -Wextra -Werror -I$(DIRINC)
 CLIB = -L$(FTDIR) -lft
 DIRINC = ./srcs/inc 
 FTDIR = ./libft
+LIBFT = ./libft/libft.a
 
 RULE_FUN = push_tostack.c \
 		reverse_rstacks.c \
@@ -60,19 +63,28 @@ BONUSSRCS = $(addprefix ./srcs/bonus/, $(BONUS_FUN)) \
 OBJS = $(SRCS:.c=.o)
 BONUSOBJS = $(BONUSSRCS:.c=.o)
 
-all : $(NAME) 
-bonus : makelibft $(BONUSOBJS) 
+all : $(NAME) $(BONUS_NAME) 
+
+bonus : $(BONUS_NAME) 
+
+$(NAME) : $(LIBFT)  $(OBJS)
+	@echo "\033[1;93m[mandatory-part]:\033[0m"
+	$(CC)  $(CFLAGS) $(OBJS) $(CLIB) -o $(NAME) 
+
+$(BONUS_NAME) : $(LIBFT) $(BONUSOBJS) 
+	@echo "\033[1;93m[bonus-part]:\033[0m"
 	$(CC) $(CFLAGS) $(BONUSOBJS) $(CLIB) -o checker
 
-$(NAME) : makelibft $(OBJS)
-	$(CC)  $(CFLAGS) $(OBJS) $(CLIB) -o $(NAME) 
-	
-makelibft : 
+$(LIBFT) : 
+	@echo "\033[1;93m[libft]:\033[0m"
 	make all bonus -C ./libft
+
 clean :
+	@echo "\033[1;93m[clean]:\033[0m"
 	rm -f $(OBJS) $(BONUSOBJS)
 	make clean -C ./libft
+
 fclean : clean
-	rm -f $(NAME) checker
-	make fclean -C ./libft
+	@echo "\033[1;93m[fclean]:\033[0m"
+	rm -f $(NAME) $(LIBFT) $(BONUS_NAME)
 re : fclean all
