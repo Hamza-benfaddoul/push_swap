@@ -6,7 +6,7 @@
 #    By: hbenfadd <hbenfadd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/24 10:32:44 by hbenfadd          #+#    #+#              #
-#    Updated: 2023/01/28 10:20:36 by hbenfadd         ###   ########.fr        #
+#    Updated: 2023/01/28 10:25:40 by hbenfadd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ BONUSSRCS = $(addprefix ./srcs/bonus/, $(BONUS_FUN)) \
 OBJS = $(SRCS:.c=.o)
 BONUSOBJS = $(BONUSSRCS:.c=.o)
 
-all : $(NAME) $(BONUS_NAME) 
+all : $(NAME)
 
 bonus : $(BONUS_NAME) 
 
